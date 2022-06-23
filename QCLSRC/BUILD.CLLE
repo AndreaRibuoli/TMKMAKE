@@ -75,8 +75,8 @@ PGM PARM(&DEVOPT_P)
             CRTCMOD  MODULE(&BLDLIB/TMKOPTIO)  SRCFILE(&SRCLIB/QATTSYSC)
             CRTCMOD  MODULE(&BLDLIB/TMKUTIL)   SRCFILE(&SRCLIB/QATTSYSC)
             CRTCMOD  MODULE(&BLDLIB/TMKEXPR)   SRCFILE(&SRCLIB/QATTSYSC)
-            CRTCLPGM PGM(&TGTLIB/TMKTCHMB)  SRCFILE(&SRCLIB/QATTCL)
-            CRTCLPGM PGM(&TGTLIB/TMKTCHOB)  SRCFILE(&SRCLIB/QATTCL)
+            CRTCLPGM PGM(&TGTLIB/TMKTCHMB)  SRCFILE(&SRCLIB/QATTCL) OUTPUT(*NONE)
+            CRTCLPGM PGM(&TGTLIB/TMKTCHOB)  SRCFILE(&SRCLIB/QATTCL) OUTPUT(*NONE)
 
 /*********** BINDING ALL C PROGRAMS **********************************/
              CRTPGM       PGM(&TGTLIB/TMKMAKEC) +
@@ -760,7 +760,8 @@ ably missing ''='' character in output translation macro format. &N Recovery  .-
 NOCMD:       CRTCMD     CMD(&TGTLIB/TMKMAKE) PGM(&TGTLIB/TMKMAKEC) +
                           SRCFILE(&SRCLIB/QATTCMD) +
                           PMTFILE(&TGTLIB/TMKMSGF)
+             DLTSPLF    FILE(TMKMAKE)              
 /*********** CREATE TMKDLT *******************************************/
-             CRTCLPGM   PGM(&TGTLIB/TMKDLT)  SRCFILE(&SRCLIB/QATTCL)
+             CRTCLPGM   PGM(&TGTLIB/TMKDLT)  SRCFILE(&SRCLIB/QATTCL) OUTPUT(*NONE)
  
 ENDPGM
