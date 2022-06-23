@@ -99,15 +99,9 @@ PGM PARM(&DEVOPT_P)
              CHKOBJ     OBJ(&TGTLIB/QMAKSRC) OBJTYPE(*FILE)
              MONMSG     MSGID(CPF9801)     EXEC(DO)
              CRTSRCPF   FILE(&TGTLIB/QMAKSRC) TEXT('MAKE Tool Built-in')
-             ENDDO
-             CPYSRCF    FROMFILE(&SRCLIB/QCSRC) +
-                          TOFILE(&TGTLIB/QMAKSRC)     +
-                          FROMMBR(TMKBLTF) TOMBR(BUILTIN)
-             MONMSG     MSGID(CPF2888)     EXEC(DO)
-             SNDPGMMSG   MSGID(CPF9898) MSGF(QCPFMSG) +
-                      MSGTYPE(*ESCAPE) +
-                      MSGDTA('QMAKSRC in the library cannot be a +
-                      DDM file' )
+             CPYSRCF    FROMFILE(&SRCLIB/QMAKSRC) +
+                          TOFILE(&TGTLIB/QMAKSRC) +
+                          FROMMBR(*ALL)
              ENDDO
 
 /*********** CREATE MESSAGE FILE IN USER SPECIFIED LIBRARY ***********/
