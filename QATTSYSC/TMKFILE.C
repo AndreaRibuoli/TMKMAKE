@@ -1250,4 +1250,3 @@ Boolean same_obj_base ( File_spec_t *tfs, File_spec_t *dfs ) {
 #endif
         return( rv );
 }
-
