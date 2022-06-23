@@ -20,7 +20,7 @@
 #include        "tmkfile.h"
 #include        "tmkparse.h"
 #include        "tmkbuilt.h"
-#include        "tmkmake.h"
+#include        "tmkmaker.h"
 #include        "tmkdict.h"
 #include        "tmkoptio.h"
 
