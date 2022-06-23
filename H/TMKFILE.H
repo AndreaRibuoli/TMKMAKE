@@ -76,7 +76,7 @@ extern   Boolean obj_not_exist_flag;
 #define  LSTOBJ_EXCEED_USRSPC      2
 #define  LSTOBJ_INVALID_TYPE       3
 
-#include        "tmkhpars.qattsysc"
+#include        "tmkhparse.h"
 
 /***********************************************************************
 *       function prototypes
