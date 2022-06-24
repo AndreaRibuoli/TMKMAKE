@@ -272,9 +272,8 @@ Int32   yylex( Void )
       }
       return GT;
     case '|'      :       /* vertical bar processing */
-    case 0x6a     :       /* vertical bar processing */
     check_more_or:
-      if( bc && ( *bp == '|' || *bp == 0x6a ) ) {
+      if( bc && ( *bp == '|' ) ) {
         --bc; ++bp;
         return OR;
       } else {
