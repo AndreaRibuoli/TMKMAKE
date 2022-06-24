@@ -1,4 +1,3 @@
-# 19 "TMKFILE.C"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +14,6 @@
 #include "tmkmaker.h"
 #include "tmkoptio.h"
 #include "tmkmsghd.h"
-# 46 "TMKFILE.C"
 Static
 Char *valid_name ( Char *txt, Int16 *sz ) {
         Char *tp = txt;
@@ -87,7 +85,6 @@ Char *namncpy ( Char *d, Char *s, Int16 sz ) {
 #endif
         return( d );
 }
-# 171 "TMKFILE.C"
 Char *parse_obj_name ( Char *f, File_spec_t *fs,
                           Int16 *len, Int16 line ) {
         Char *orgp = f;
@@ -239,7 +236,6 @@ Char *parse_obj_name ( Char *f, File_spec_t *fs,
 #endif
         return( rp );
 }
-# 368 "TMKFILE.C"
 Char *parse_file_ext ( Char *f, File_spec_t *fs ) {
         Char *tp;
         Int16 sz;
@@ -375,7 +371,6 @@ Static Int32 axtoi( Char *bp ) {
         }
         return( ri );
 }
-# 512 "TMKFILE.C"
 Void obj_not_exist_trap ( int sig ) {
 #ifdef __ILEC400__
         _INTRPT_Hndlr_Parms_T excinfo;
@@ -649,7 +644,6 @@ Boolean update_file_date ( File_spec_t *fs, Int16 line ) {
 
                 cd = md.crt_date;
                 ud = md.change_date;
-# 800 "TMKFILE.C"
 #if DEBUG
                     last_debug = TRUE;
 #endif
@@ -1064,7 +1058,6 @@ Void touch_target ( Element_t *ep ) {
         }
     }
 }
-# 1226 "TMKFILE.C"
 Boolean same_obj_base ( File_spec_t *tfs, File_spec_t *dfs ) {
         Boolean rv = FALSE;
 #ifdef SRVOPT

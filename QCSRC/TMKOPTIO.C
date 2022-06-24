@@ -1,4 +1,3 @@
-# 15 "TMKOPTIO.C"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -562,7 +561,6 @@ Char *get_next_requested_target ( Void ) {
 #endif
         return( rp );
 }
-# 588 "TMKOPTIO.C"
 Int16 opt_get_left_margin( Void ) {
         return( src_left_margin );
 }
@@ -571,7 +569,6 @@ Int16 opt_get_left_margin( Void ) {
 Int16 opt_get_right_margin( Void ) {
         return( src_right_margin );
 }
-# 605 "TMKOPTIO.C"
 Int16 opt_get_rtncde_methods ( Void ) {
         return( rtncde_handling );
 }
@@ -579,7 +576,7 @@ Int16 opt_get_rtncde_methods ( Void ) {
 Int16 opt_get_rtncde_sev ( Void ) {
         return( rtncde_severity );
 }
-# 621 "TMKOPTIO.C"
+
 Void opt_set_ingore ( Void ) {
 #ifdef SRVOPT
         if( srvopt_function() )

@@ -1,4 +1,3 @@
-# 16 "TMKMAKER.C"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,7 +47,6 @@ void set_proc_date ( File_spec_t *tfs, File_spec_t *dfs )
          tfs->proc_update.val = dfs->proc_update.val;
     }
 }
-# 75 "TMKMAKER.C"
 Static
 Boolean target_older ( Element_t *t, Element_t *d, Int16 line,
                        Date_t last_update ) {
@@ -253,7 +251,6 @@ Void system_cmd_trap ( int sig ) {
         act->xremovemsg = 0;
 #endif
 }
-# 289 "TMKMAKER.C"
 Static
 Void convert_to_pack ( Char *buf, Int16 rm, Int16 num ) {
         Char pc;
@@ -343,7 +340,6 @@ Int16 exec_command ( Char *cmd, Int16 line ) {
 #endif
         return( rc );
 }
-# 391 "TMKMAKER.C"
 Static
 Void set_pre_defined_macros ( Rules_t *rp ) {
         Element_t *ep;

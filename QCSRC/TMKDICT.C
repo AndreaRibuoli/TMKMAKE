@@ -1,4 +1,3 @@
-# 1 "TMKDICT.C"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -424,7 +423,6 @@ Char *output_translate ( Char *rp, Char *from, Char *to,
 #endif
         return( rp );
 }
-# 443 "TMKDICT.C"
 Static
 Char *expand_macro_txt ( Char **txt, Int32 *msz, Int16 line ) {
         Char *mp = *txt;

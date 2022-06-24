@@ -1,4 +1,3 @@
-# 15 "TMKMAKEC.C"
 #include <stdio.h>
 #include <stdlib.h>
 

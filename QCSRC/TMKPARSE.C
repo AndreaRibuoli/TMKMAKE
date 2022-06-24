@@ -1,4 +1,3 @@
-# 15 "TMKPARSE.C"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -672,7 +671,6 @@ Char *read_source( Incl_t *mf, Int32 *read_cnt ) {
 
         return( ibuf1 + mf->left_margin );
 }
-# 699 "TMKPARSE.C"
 Static
 Void register_rules ( Void ) {
         Element_t *target;
@@ -806,7 +804,6 @@ Char *include_keyword_found ( Char *rtn_txt ) {
         }
         return( ep );
 }
-# 850 "TMKPARSE.C"
 Static
 Char *read_next_line ( Int16 *line ) {
         Boolean cont_line;
@@ -1161,7 +1158,6 @@ fprintf(stderr,"cd_pop underflow\n");
                cd->active,cd->ifelse_before);
 #endif
 }
-# 1214 "TMKPARSE.C"
 Static
 Char *read_line ( Int16 *line ) {
         Char *rd_ln;
@@ -1587,7 +1583,6 @@ Int16 parse_makefile ( Char *makef, Boolean parse_makef ) {
         register_rules();
         return( TRUE );
 }
-# 1648 "TMKPARSE.C"
 Rules_t *get_first_rule ( void ) {
         next_rule = head;
 
@@ -1605,7 +1600,6 @@ Rules_t *get_first_rule ( void ) {
 #endif
         return( next_rule );
 }
-# 1674 "TMKPARSE.C"
 Rules_t *get_next_rule ( void ) {
 #ifdef SRVOPT
         if( srvopt_function() )
