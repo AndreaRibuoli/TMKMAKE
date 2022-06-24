@@ -756,9 +756,5 @@ NOCMD:       CRTCMD     CMD(&TGTLIB/TMKMAKE) PGM(&TGTLIB/TMKMAKEC) +
                           SRCFILE(&SRCLIB/QCMDSRC) +
                           PMTFILE(&TGTLIB/TMKMSGF)
              DLTSPLF    FILE(TMKMAKE)              
-/*********** CREATE TMKDLT *******************************************/
-             CRTCLPGM   PGM(&TGTLIB/TMKDLT)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*NONE)
-             
-
  
 ENDPGM

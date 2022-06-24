@@ -33,7 +33,6 @@ The source for everything you need has been provided in the GitHub repository
 | FILE     | MEMBER    | DESCRIPTION                                  |
 |:-------- |:--------- |:-------------------------------------------- |
 | QCMDSRC  | TMKMAKE   | Command source for TMKMAKE command           |
-| QCLSRC   | TMKDLT    | CL  program source for TMKMAKE tool deletion |
 | QCLSRC   | TMKTCHMB  | TMKMAKE CL source                            |
 | QCLSRC   | TMKTCHOB  | TMKMAKE CL source                            |
 | QCLSRC   | TMKEXMP1  | Example TMKMAKE description file             |
@@ -67,7 +66,6 @@ The following objects are created:
 
 | OBJECT NAME | OBJECT TYPE | DESCRIPTION          |
 |:----------- |:----------- |:-------------------- |
-| TMKDLT      | *PGM        | MAKE tool uninstall  |
 | TMKMAKEC    | *PGM        | MAKE Program tool    |
 | TMKTCHMB    | *PGM        | MAKE CL utility      |
 | TMKTCHOB    | *PGM        | MAKE CL utility      |
