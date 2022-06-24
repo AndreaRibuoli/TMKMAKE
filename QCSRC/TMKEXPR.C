@@ -1,16 +1,3 @@
-/* ================================================================= */
-/*                                                                   */
-/*  MODULE:    TMKEXPR                                               */
-/*                                                                   */
-/*                                                                   */
-/*  MODULE-TYPE: C Library                                           */
-/*                                                                   */
-/*  Processor:  C                                                    */
-/*                                                                   */
-/*  Purpose:    Conditional directive expression parser              */
-/*                                                                   */
-/* ================================================================= */
-
 #include        <stdio.h>
 #include        <stdlib.h>
 #include        <string.h>
@@ -72,24 +59,6 @@ typedef int yytabelem;
 # define YYERRCODE 256
 
 
-/* ================================================================= */
-/*  FUNCTION:    evaluate_exp                                        */
-/*                                                                   */
-/*  Purpose:    Evaluate the expression in the input buffer          */
-/*  Input:      char *s     input buffer contains expression         */
-/*              int  line   description file line #                  */
-/*                                                                   */
-/*  Output:     function returns                                     */
-/*              = 0               expression evaluate, return value  */
-/*                                stores in global variable          */
-/*                                return_value.                      */
-/*              = ERR_INV_SYNTAX  Invalid expression syntax          */
-/*              = ERR_INV_OCT     Invalid octal number in expression */
-/*              = ERR_INV_HEX     Invalid hex number in expression   */
-/*              = ERR_INV_TOKEN   Invalid token in expression        */
-/*              = ERR_TOO_COMPLEX Expression too complex to evaluate */
-/* ================================================================= */
-
 Static  Char    *bp;
 Static  Int32   bc;
 Static  Int16   line_no;
@@ -116,14 +85,6 @@ Int32   evaluate_exp ( Char *s, Int16 line )
 }
 
 #if     YYDEBUG
-
-/* ================================================================= */
-/*                                                                   */
-/*  FUNCTION:    MAIN                                                */
-/*                                                                   */
-/*  Purpose:    Conditional directive expression parser              */
-/*                                                                   */
-/* ================================================================= */
 
 char    b[512];
 
@@ -176,13 +137,6 @@ yywrap( Void )
         exit( TMK_EXIT_FAILURE );
 }
 
-/* ================================================================= */
-/*  FUNCTION:    isodigit                                            */
-/*                                                                   */
-/*  Purpose:    Determine the input character is an octal digit      */
-/*                                                                   */
-/* ================================================================= */
-
 Static
 Int32   isodigit ( Int32 c )
 {
@@ -199,14 +153,6 @@ Int32   isodigit ( Int32 c )
         return( rc );
 }
 
-/* ================================================================= */
-/*  FUNCTION:    yylex                                               */
-/*                                                                   */
-/*  Purpose:    Lexical analyser for the conditional directives      */
-/*              expression evaluation.                               */
-/*                                                                   */
-/* ================================================================= */
-
 Int32   yylex( Void )
 {
         Int32   c;
@@ -215,12 +161,10 @@ Int32   yylex( Void )
         if( srvopt_function() )
             printf("FCT:yylex()\n");
 #endif
-        /* skip all the leading blanks before parsing the next token */
         while( bc && *bp == ' ' ) {
             --bc; ++bp;
         }
 
-        /* return ENDINPUT if no more character from the input buffer */
         if( bc == 0 )
             return ENDINPUT;
 
@@ -229,32 +173,24 @@ Int32   yylex( Void )
 
 #if 0
 #if     YYDEBUG
-        /* special processing code during debug phase                 */
         switch( c ) {
         case 'E':       return( EXIT );         /* exit exp main pgm  */
         case 'D':       return( DEBUG );        /* toggle debug info  */
         }
 #endif  /* YYDEBUG */
 #endif
-
-        /* parse a valid decimal/octal/hexadecimal number             */
         if( isdigit(c) ) {
             if( yylval = ( c - '0' ) ) {
-                /* first digit is non zero, must be decimal */
                 while( bc && isdigit( c = *bp ) ) {
                     yylval      *= 10;
                     yylval      += c - '0';
                     ++bp;       --bc;
                 }
             } else {
-                /* first digit is zero, check if octal or hex */
                 if( bc ) {
                     c   = *bp;
                     if( c == 'x' || c == 'X' ) {
-                        /* ensure the digit after 'x' */
-                        /* is valid hex digits        */
                         if( isxdigit( *( bp+1 ) ) ) {
-                            /* convert hex number */
                             ++bp;       --bc;
                             while( bc && isxdigit( c = *bp ) ) {
                                 yylval  *= 16;
@@ -263,24 +199,19 @@ Int32   yylex( Void )
                                 ++bp;   --bc;
                             }
                             if( bc && !isspace( *bp ) ) {
-                                /* invalid hex format  */
                                 log_error( INV_HEX_NO, NULL, line_no );
                                 exit( TMK_EXIT_FAILURE );
                             }
                         } else {
-                            /* invalid hex format  */
                             log_error( INV_HEX_NO, NULL, line_no );
                             exit( TMK_EXIT_FAILURE );
                         }
                     } else {
-                        /* convert octal number */
                         while( bc && isodigit( c = *bp ) ) {
                             yylval      *= 8;
                             yylval      += c - '0';
                             ++bp;       --bc;
                         }
-                        /* check for invalid octal number */
-                        /* sequence                       */
                         if( bc && isdigit( c ) ) {
                             log_error( INV_OCTAL_NO, NULL, line_no );
                             exit( TMK_EXIT_FAILURE );
@@ -291,7 +222,6 @@ Int32   yylex( Void )
             return( NUMBER );
         }
 
-        /* parse for expression operator */
         switch( c ) {
         case '\n'       :       return ENDINPUT;
         case '('        :       return LEFTP;
@@ -342,13 +272,12 @@ Int32   yylex( Void )
             }
             return GT;
         case '|'      :       /* vertical bar processing */
-        case 0x6a       :       /* vertical bar processing */
+        case 0x6a     :       /* vertical bar processing */
 check_more_or:
             if( bc && ( *bp == '|' || *bp == 0x6a ) ) {
                 --bc; ++bp;
                 return OR;
             } else {
-                    /* check for || condition */
                     if( bc >= 3 && *bp == '?'
                         && *(bp+1) == '?' && *(bp+2) == '!' ) {
                         bc      -= 3;
@@ -376,7 +305,6 @@ check_more_or:
                 case '-' :      c       = CMPL;         break;
                 default :       found   = 0;
                 }
-                /* adjust bc count and pointer if tri-graph found */
                 if( found ) {
                     bc  -= 2;
                     bp  += 2;
@@ -566,14 +494,8 @@ char * yyreds[] =
 #       define YYDEBUG  1       /* make debugging available */
 #endif
 
-/*
-** user known globals
-*/
 int yydebug;                    /* set to 1 to get debugging */
 
-/*
-** driver internal defines
-*/
 #define YYFLAG          (-1000)
 
 #ifdef YYSPLIT
@@ -587,9 +509,6 @@ int yydebug;                    /* set to 1 to get debugging */
                    }
 #endif
 
-/*
-** global variables used by the parser
-*/
 YYSTYPE yyv[ YYMAXDEPTH ];      /* value stack */
 int yys[ YYMAXDEPTH ];          /* state stack */
 
@@ -605,16 +524,9 @@ int yyerrflag;                  /* error recovery flag */
 int yychar;                     /* current input token number */
 
 
-
-/*
-** yyparse - return 0 if worked, 1 if syntax error not recovered from
-*/
 int
 yyparse()
 {
-        /*
-        ** Initialize externals - yyparse may be called more than once
-        */
         yypv = &yyv[-1];
         yyps = &yys[-1];
         yystate = 0;
@@ -630,39 +542,19 @@ yyparse()
                 register int yy_state;          /* current state */
                 register int  yy_n;             /* internal state number info */
 
-                /*
-                ** get globals into registers.
-                ** branch to here only if YYBACKUP was called.
-                */
         yynewstate:
                 yy_pv = yypv;
                 yy_ps = yyps;
                 yy_state = yystate;
                 goto yy_newstate;
 
-                /*
-                ** get globals into registers.
-                ** either we just started, or we just finished a reduction
-                */
         yystack:
                 yy_pv = yypv;
                 yy_ps = yyps;
                 yy_state = yystate;
 
-                /*
-                ** top of for (;;) loop while no reductions done
-                */
         yy_stack:
-                /*
-                ** put a state and value onto the stacks
-                */
 #if YYDEBUG
-                /*
-                ** if debugging, look up token value in list of value vs.
-                ** name pairs.  0 and negative (-1) are special values.
-                ** Note: linear search is used since time is not a real
-                ** consideration while debugging.
-                */
                 if ( yydebug )
                 {
                         register int yy_i;
@@ -692,16 +584,10 @@ yyparse()
                 *yy_ps = yy_state;
                 *++yy_pv = yyval;
 
-                /*
-                ** we have a new state - find out what to do
-                */
         yy_newstate:
                 if ( ( yy_n = yypact[ yy_state ] ) <= YYFLAG )
                         goto yydefault;         /* simple state */
 #if YYDEBUG
-                /*
-                ** if debugging, need to mark whether new token grabbed
-                */
                 yytmp = yychar < 0;
 #endif
                 if ( ( yychar < 0 ) && ( ( yychar = yylex() ) < 0 ) )
@@ -774,9 +660,6 @@ yyparse()
                                 }
                         }
 #endif /* YYDEBUG */
-                        /*
-                        ** look through exception table
-                        */
                         {
                                 register int *yyxi = yyexca;
 
@@ -793,51 +676,31 @@ yyparse()
                         }
                 }
 
-                /*
-                ** check for syntax error
-                */
                 if ( yy_n == 0 )        /* have an error */
                 {
-                        /* no worry about speed here! */
                         switch ( yyerrflag )
                         {
                         case 0:         /* new error */
                                 yyerror( "syntax error" );
                                 goto skip_init;
                         yyerrlab:
-                                /*
-                                ** get globals into registers.
-                                ** we have a user generated syntax type error
-                                */
                                 yy_pv = yypv;
                                 yy_ps = yyps;
                                 yy_state = yystate;
                                 yynerrs++;
                         skip_init:
                         case 1:
-                        case 2:         /* incompletely recovered error */
-                                        /* try again... */
+                        case 2:         
                                 yyerrflag = 3;
-                                /*
-                                ** find state where "error" is a legal
-                                ** shift action
-                                */
                                 while ( yy_ps >= yys )
                                 {
                                         yy_n = yypact[ *yy_ps ] + YYERRCODE;
                                         if ( yy_n >= 0 && yy_n < YYLAST &&
                                                 yychk[yyact[yy_n]] == YYERRCODE)
                                         {
-                                                /*
-                                                ** simulate shift of "error"
-                                                */
                                                 yy_state = yyact[ yy_n ];
                                                 goto yy_stack;
                                         }
-                                        /*
-                                        ** current state has no shift on
-                                        ** "error", pop stack
-                                        */
 #if YYDEBUG
 #       define _POP_ "Error recovery pops state %d, uncovers state %d\n"
                                         if ( yydebug )
@@ -848,20 +711,9 @@ yyparse()
                                         yy_ps--;
                                         yy_pv--;
                                 }
-                                /*
-                                ** there is no state on stack with "error" as
-                                ** a valid shift.  give up.
-                                */
                                 YYABORT;
                         case 3:         /* no shift yet; eat a token */
 #if YYDEBUG
-                                /*
-                                ** if debugging, look up token in list of
-                                ** pairs.  0 and negative shouldn't occur,
-                                ** but since timing doesn't matter when
-                                ** debugging, it doesn't hurt to leave the
-                                ** tests here.
-                                */
                                 if ( yydebug )
                                 {
                                         register int yy_i;
@@ -894,36 +746,14 @@ yyparse()
                                 goto yy_newstate;
                         }
                 }/* end if ( yy_n == 0 ) */
-                /*
-                ** reduction by production yy_n
-                ** put stack tops, etc. so things right after switch
-                */
 #if YYDEBUG
-                /*
-                ** if debugging, print the string that is the user's
-                ** specification of the reduction which is just about
-                ** to be done.
-                */
                 if ( yydebug )
                         printf( "Reduce by (%d) \"%s\"\n",
                                 yy_n, yyreds[ yy_n ] );
 #endif
                 yytmp = yy_n;                   /* value to switch over */
                 yypvt = yy_pv;                  /* $vars top of value stack */
-                /*
-                ** Look in goto table for next state
-                ** Sorry about using yy_state here as temporary
-                ** register variable, but why not, if it works...
-                ** If yyr2[ yy_n ] doesn't have the low order bit
-                ** set, then there is no action to be done for
-                ** this reduction.  So, no saving & unsaving of
-                ** registers done.  The only difference between the
-                ** code just after the if and the body of the if is
-                ** the goto yy_stack in the body.  This way the test
-                ** can be made before the choice of what to do is needed.
-                */
                 {
-                        /* length of production doubled with extra bit */
                         register int yy_len = yyr2[ yy_n ];
 
                         if ( !( yy_len & 01 ) )
@@ -955,25 +785,20 @@ yyparse()
                 yyps = yy_ps;
                 yypv = yy_pv;
         }
-        /*
-        ** code supplied by user is placed in this switch
-        */
 
                 switch(yytmp){
 
 case 1:{        return( yypvt[-1] );            } /*NOTREACHED*/ break;
 case 2:{        yyval   = yypvt[-1];            } /*NOTREACHED*/ break;
 case 3:{        yyval   = yypvt[-2] * yypvt[-0];        } /*NOTREACHED*/ break;
-case 4:{        /* keep code in separate lines to avoid */
-                        /* generated code over 80 chars/line    */
+case 4:{        
                         if( yypvt[-0] == 0 ) {
                             log_error( DIVIDED_BY_ZERO, NULL, line_no );
                             exit( TMK_EXIT_FAILURE );
                         }
                         yyval   = yypvt[-2] / yypvt[-0];
                 } /*NOTREACHED*/ break;
-case 5:{        /* keep code in separate lines to avoid */
-                        /* generated code over 80 chars/line    */
+case 5:{        
                         if( yypvt[-0] == 0 ) {
                             log_error( DIVIDED_BY_ZERO, NULL, line_no );
                             exit( TMK_EXIT_FAILURE );
@@ -982,14 +807,12 @@ case 5:{        /* keep code in separate lines to avoid */
                 } /*NOTREACHED*/ break;
 case 6:{        yyval   = yypvt[-2] + yypvt[-0];        } /*NOTREACHED*/ break;
 case 7:{        yyval   = yypvt[-2] - yypvt[-0];        } /*NOTREACHED*/ break;
-case 8:{        /* keep code in separate lines to avoid */
-                        /* generated code over 80 chars/line    */
+case 8:{        
                         yyval   = ( yypvt[-0] != 0 )
                                 ? yypvt[-2] << yypvt[-0]
                                 : yypvt[-2];
                 } /*NOTREACHED*/ break;
-case 9:{        /* keep code in separate lines to avoid */
-                        /* generated code over 80 chars/line    */
+case 9:{        
                         yyval   = ( yypvt[-0] != 0 )
                                 ? yypvt[-2] >> yypvt[-0]
                                 : yypvt[-2];
