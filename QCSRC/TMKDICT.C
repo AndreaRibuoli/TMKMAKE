@@ -1,17 +1,3 @@
-/* ================================================================= */
-/*                                                                   */
-/*  MODULE:    TMKDICT                                               */
-/*                                                                   */
-/*                                                                   */
-/*  MODULE-TYPE: C Library                                           */
-/*                                                                   */
-/*  Processor:  C                                                    */
-/*                                                                   */
-/*  Purpose:    Dictionery support functions.                        */
-/*                                                                   */
-/* ================================================================= */
-
-
 #include        <stdio.h>
 #include        <stdlib.h>
 #include        <string.h>
@@ -24,11 +10,6 @@
 #include        "tmkdict.h"
 #include        "tmkoptio.h"
 #include        "tmkmsghd.h"
-
-
-/***********************************************************************
-        Variable declarations
-***********************************************************************/
 
 Static  Sym_e_t *dict_table[ DICT_TAB_SZ ];
 
