@@ -47,9 +47,9 @@
 #define OPT_NODEBUG             0x0000       /* NO debug information */
 #define OPT_DEBUG               0x0020       /* debug information    */
 
-#define OPT_DEFAULT             OPT_NOIGNORE ¦ OPT_NOSILENT ¦  \
-                                OPT_BIRULES  ¦ OPT_EXEC     ¦  \
-                                OPT_NOTOUCH  ¦ OPT_NODEBUG
+#define OPT_DEFAULT             OPT_NOIGNORE | OPT_NOSILENT |  \
+                                OPT_BIRULES  | OPT_EXEC     |  \
+                                OPT_NOTOUCH  | OPT_NODEBUG
 
 /*      AS/400 MAKE return code handling definitions                 */
 #define RTN_EXCEPTION           0x01         /* exception handling   */

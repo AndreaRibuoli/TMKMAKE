@@ -390,7 +390,7 @@ Char *output_translate ( Char *rp, Char *from, Char *to,
                     "\"%s\",\"%s\",%d)\n",
                     rp!=NULL?rp:"NULL",from,to,end,line);
 #endif
-        if( rp == NULL ¦¦ *rp == 0 ) {
+        if( rp == NULL || *rp == 0 ) {
             return( rp );
         }
         if( *from == 0 ) {
@@ -439,7 +439,7 @@ Char *expand_macro_txt ( Char **txt, Int32 *msz, Int16 line ) {
 #endif
         if( *mp == '(' ) {
             ++mp;
-            if( *mp == '$' ¦¦ *mp == '&' ) {
+            if( *mp == '$' || *mp == '&' ) {
                 Int32 nmsz;
 
 
@@ -510,7 +510,7 @@ Char *expand_macro_txt ( Char **txt, Int32 *msz, Int16 line ) {
             }
         } else {
 
-            if( *mp == '$' ¦¦ *mp == '&' ) {
+            if( *mp == '$' || *mp == '&' ) {
                 rp = mp;
                 *msz = 1;
                 *txt = mp + 1;

@@ -147,9 +147,9 @@ Cmd_t   *find_inf_cmd ( File_spec_t *tfs, File_spec_t *dfs ) {
   }
 #endif
   if( ( memcmp( tfs->type, FS_T_LIBFILE,
-               sizeof( FS_T_LIBFILE ) ) == 0 && *tfs->extmbr == 0 ) ¦¦
+               sizeof( FS_T_LIBFILE ) ) == 0 && *tfs->extmbr == 0 ) ||
      ( memcmp( tfs->type, FS_T_TXTLIB,
-              sizeof( FS_T_TXTLIB  ) ) == 0 && *tfs->extmbr == 0 ) ¦¦
+              sizeof( FS_T_TXTLIB  ) ) == 0 && *tfs->extmbr == 0 ) ||
      ( memcmp( tfs->type, FS_T_BNDDIR,
               sizeof( FS_T_BNDDIR  ) ) == 0 && *tfs->extmbr == 0 ) ) {
     return( NULL );
@@ -199,9 +199,9 @@ Rules_t *find_valid_infer_rule ( File_spec_t *tfs, Int16 line ) {
     printf("FCT:find_valid_infer_rule(%s)\n",srv_fs(tfs));
 #endif
   if( ( memcmp( tfs->type, FS_T_LIBFILE,
-               sizeof( FS_T_LIBFILE ) ) == 0 && *tfs->extmbr == 0 ) ¦¦
+               sizeof( FS_T_LIBFILE ) ) == 0 && *tfs->extmbr == 0 ) ||
      ( memcmp( tfs->type, FS_T_TXTLIB,
-              sizeof( FS_T_TXTLIB  ) ) == 0 && *tfs->extmbr == 0 ) ¦¦
+              sizeof( FS_T_TXTLIB  ) ) == 0 && *tfs->extmbr == 0 ) ||
      ( memcmp( tfs->type, FS_T_BNDDIR,
               sizeof( FS_T_BNDDIR  ) ) == 0 && *tfs->extmbr == 0 ) ) {
     return( NULL );
@@ -217,9 +217,9 @@ Rules_t *find_valid_infer_rule ( File_spec_t *tfs, Int16 line ) {
       fs.is_file = rp->target->fs.is_file;
       
       if( ( memcmp( tfs->type, FS_T_LIBFILE,
-                   sizeof( FS_T_LIBFILE ) ) == 0 ) ¦¦
+                   sizeof( FS_T_LIBFILE ) ) == 0 ) ||
          ( memcmp( tfs->type, FS_T_TXTLIB,
-                  sizeof( FS_T_TXTLIB  ) ) == 0 ) ¦¦
+                  sizeof( FS_T_TXTLIB  ) ) == 0 ) ||
          ( memcmp( tfs->type, FS_T_BNDDIR,
                   sizeof( FS_T_BNDDIR  ) ) == 0 )) {
         if( fs.is_file ) {
@@ -275,15 +275,15 @@ Void    update_file_nm ( File_spec_t *tfs, File_spec_t *dfs ) {
     printf("%s  %s)\n",srv_cat,srv_fs(dfs));
   }
 #endif
-  fromp = dfs->is_file ¦¦
-  strcmp( dfs->type, FS_T_LIBFILE ) == 0 ¦¦
-  strcmp( dfs->type, FS_T_TXTLIB  ) == 0 ¦¦
+  fromp = dfs->is_file ||
+  strcmp( dfs->type, FS_T_LIBFILE ) == 0 ||
+  strcmp( dfs->type, FS_T_TXTLIB  ) == 0 ||
   strcmp( dfs->type, FS_T_BNDDIR  ) == 0
   ? dfs->extmbr : dfs->file;
   
-  strcpy( tfs->is_file ¦¦
-         strcmp( tfs->type, FS_T_LIBFILE ) == 0 ¦¦
-         strcmp( tfs->type, FS_T_TXTLIB  ) == 0 ¦¦
+  strcpy( tfs->is_file ||
+         strcmp( tfs->type, FS_T_LIBFILE ) == 0 ||
+         strcmp( tfs->type, FS_T_TXTLIB  ) == 0 ||
          strcmp( dfs->type, FS_T_BNDDIR  ) == 0
          ? tfs->extmbr : tfs->file, fromp );
 }

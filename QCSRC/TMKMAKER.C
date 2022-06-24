@@ -88,7 +88,7 @@ Boolean target_older ( Element_t *t, Element_t *d, Int16 line,
             d = d->nxt;
 
             if (( cmp_date( (last_update.val == 0 ? t->fs.last_update :
-                           last_update), ep->fs.last_update ) < 0 ) ¦¦
+                           last_update), ep->fs.last_update ) < 0 ) ||
                ( cmp_date( (last_update.val == 0 ? t->fs.last_update :
                            last_update), ep->fs.proc_update ) < 0 )) {
                 set_proc_date ( &t->fs, &ep->fs );
@@ -261,7 +261,7 @@ Void convert_to_pack ( Char *buf, Int16 rm, Int16 num ) {
         while( num-- ) {
             pc = rm % 10;
             rm /= 10;
-            pc ¦= ( rm % 10 ) * 16;
+            pc |= ( rm % 10 ) * 16;
             rm /= 10;
             buf[num] = pc;
         }
@@ -365,8 +365,8 @@ Void set_pre_defined_macros ( Rules_t *rp ) {
 
 
         update_sym( "%",
-              ( ( strcmp( rp->target->fs.type, FS_T_LIBFILE ) == 0 ¦¦
-                  strcmp( rp->target->fs.type, FS_T_TXTLIB ) == 0 ¦¦
+              ( ( strcmp( rp->target->fs.type, FS_T_LIBFILE ) == 0 ||
+                  strcmp( rp->target->fs.type, FS_T_TXTLIB ) == 0 ||
                   strcmp( rp->target->fs.type, FS_T_BNDDIR ) == 0 ) &&
                   *rp->target->fs.extmbr != 0 )
               ? rp->target->fs.extmbr : "",
@@ -523,7 +523,7 @@ Boolean make_target ( Rules_t *rp ) {
                 if( ( drp = in_rule_list( ep->name ) ) != NULL ) {
 
 
-                    ep->maked ¦= make_target( drp );
+                    ep->maked |= make_target( drp );
                     rp->dependent->fs.proc_update.val =
                     drp->target->fs.proc_update.val;
                 }
@@ -595,7 +595,7 @@ Boolean make_target ( Rules_t *rp ) {
                         cmd = bi_macro_substitution ( cmd );
 
 
-                        if( ( !no_echo && !opt_silent_mode() ) ¦¦
+                        if( ( !no_echo && !opt_silent_mode() ) ||
                             opt_no_execute() ) {
                             log_usrmsg( cmd );
                         }

@@ -344,11 +344,11 @@ Char *has_dyn_macro ( Char *txt ) {
         if( srvopt_function() )
             printf("FCT:has_dyn_macro(\"%s\")\n",txt);
 #endif
-        ( ( rp = strstr( txt, "$@" ) ) != NULL ) ¦¦
-        ( ( rp = strstr( txt, "$(@L)" ) ) != NULL ) ¦¦
-        ( ( rp = strstr( txt, "$(@F)" ) ) != NULL ) ¦¦
-        ( ( rp = strstr( txt, "$(@M)" ) ) != NULL ) ¦¦
-        ( ( rp = strstr( txt, "$(@T)" ) ) != NULL ) ¦¦
+        ( ( rp = strstr( txt, "$@" ) ) != NULL ) ||
+        ( ( rp = strstr( txt, "$(@L)" ) ) != NULL ) ||
+        ( ( rp = strstr( txt, "$(@F)" ) ) != NULL ) ||
+        ( ( rp = strstr( txt, "$(@M)" ) ) != NULL ) ||
+        ( ( rp = strstr( txt, "$(@T)" ) ) != NULL ) ||
         ( ( rp = strstr( txt, "$(@S)" ) ) != NULL );
 
 #ifdef SRVOPT
@@ -866,7 +866,7 @@ try_again:
 
 
 
-                if( *tp == '\\' ¦¦ *tp == '+' ) {
+                if( *tp == '\\' || *tp == '+' ) {
                     cont_line =
                     read_more = TRUE;
 
@@ -1209,16 +1209,16 @@ Char *read_line ( Int16 *line ) {
                 prev_active = cd->ifelse_before;
                 cd_pop();
                 cd_push( cd_op, *line,
-                         CD_IF¦CD_ELSE¦CD_ELIF¦CD_ENDIF¦CD_IFDEF¦
-                         CD_IFNDEF¦CD_ERROR¦CD_UNDEF,
+                         CD_IF|CD_ELSE|CD_ELIF|CD_ENDIF|CD_IFDEF|
+                         CD_IFNDEF|CD_ERROR|CD_UNDEF,
                          cd->active &&
                               ( prev_active ? FALSE : (exp_value != 0) ),
-                         prev_active ¦¦ exp_value != 0 );
+                         prev_active || exp_value != 0 );
                 break;
             case CD_IF :
                 cd_push( cd_op, *line,
-                         CD_IF¦CD_ELSE¦CD_ELIF¦CD_ENDIF¦CD_IFDEF¦
-                         CD_IFNDEF¦CD_ERROR¦CD_UNDEF,
+                         CD_IF|CD_ELSE|CD_ELIF|CD_ENDIF|CD_IFDEF|
+                         CD_IFNDEF|CD_ERROR|CD_UNDEF,
                          cd->active ? ( exp_value != 0 ) : FALSE,
                                                   exp_value != 0 );
                 break;
@@ -1230,7 +1230,7 @@ Char *read_line ( Int16 *line ) {
                 prev_active = cd->ifelse_before;
                 cd_pop();
                 cd_push( cd_op, *line,
-                         CD_IF¦CD_ENDIF¦CD_IFDEF¦CD_IFNDEF¦CD_ERROR¦
+                         CD_IF|CD_ENDIF|CD_IFDEF|CD_IFNDEF|CD_ERROR|
                          CD_UNDEF, cd->active && !prev_active, TRUE );
                 break;
             case CD_ENDIF :
@@ -1247,8 +1247,8 @@ Char *read_line ( Int16 *line ) {
 
             case CD_IFDEF :
                 cd_push( cd_op, *line,
-                         CD_IF¦CD_ENDIF¦CD_IFDEF¦
-                         CD_IFNDEF¦CD_ERROR¦CD_UNDEF,
+                         CD_IF|CD_ENDIF|CD_IFDEF|
+                         CD_IFNDEF|CD_ERROR|CD_UNDEF,
                          exp_value ? cd->active : FALSE, FALSE );
                 break;
             case CD_UNDEF :
@@ -1462,7 +1462,7 @@ Void setup_parser_structures ( Void ) {
         cur_cd_lvl = 0;
         cd->op = 0;
         cd->line = -1;
-        cd->cd_expected = CD_IF¦CD_IFDEF¦CD_IFNDEF¦CD_ERROR¦CD_UNDEF;
+        cd->cd_expected = CD_IF|CD_IFDEF|CD_IFNDEF|CD_ERROR|CD_UNDEF;
         cd->active = TRUE;
         cd->ifelse_before = FALSE;
 }

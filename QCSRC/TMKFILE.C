@@ -28,7 +28,7 @@ Char *valid_name ( Char *txt, Int16 *sz ) {
 #endif
 
 
-        if( *tp == 0 ¦¦ !( isalpha( *tp ) ¦¦ look_for( "$@*", *tp ) ) ) {
+        if( *tp == 0 || !( isalpha( *tp ) || look_for( "$@*", *tp ) ) ) {
             rp = NULL;
         }
         else {
@@ -37,12 +37,12 @@ Char *valid_name ( Char *txt, Int16 *sz ) {
 
 
             while( *tp ) {
-                if( !( isalnum( *tp ) ¦¦ look_for( "$@_", *tp ) ) ) {
+                if( !( isalnum( *tp ) || look_for( "$@_", *tp ) ) ) {
                     Char *mp = has_dyn_macro( tp - 1 );
 
 
 
-                    if( mp == NULL ¦¦ mp != ( tp - 1 ) ) {
+                    if( mp == NULL || mp != ( tp - 1 ) ) {
                         break;
                     }
 
@@ -52,7 +52,7 @@ Char *valid_name ( Char *txt, Int16 *sz ) {
             }
 
             len = tp - txt;
-            rp = ( len == 0 ¦¦ len > 10 ) ? NULL : tp;
+            rp = ( len == 0 || len > 10 ) ? NULL : tp;
         }
         *sz = len;
 
@@ -148,7 +148,7 @@ Char *parse_obj_name ( Char *f, File_spec_t *fs,
 
             namncpy( fs->file, f, sz );
             f = tp + 1;
-            if( ( tp = valid_name( f, &sz ) ) == NULL ¦¦
+            if( ( tp = valid_name( f, &sz ) ) == NULL ||
                 *tp != ')' ) {
 
                 log_error( INV_OBJ_SPEC, NULL, line );
@@ -168,7 +168,7 @@ Char *parse_obj_name ( Char *f, File_spec_t *fs,
 
         if( *tp == '<' ) {
             f = ++tp;
-            if( ( tp = valid_name( f, &sz ) ) == NULL ¦¦
+            if( ( tp = valid_name( f, &sz ) ) == NULL ||
 
                 ( *f == '*' ) ) {
 
@@ -196,7 +196,7 @@ Char *parse_obj_name ( Char *f, File_spec_t *fs,
 
                         f = tp + 1;
                         tp = valid_name( f, &sz );
-                        if( tp == NULL ¦¦ sz > SEU_TYP_SZ ¦¦
+                        if( tp == NULL || sz > SEU_TYP_SZ ||
                               *tp != '>' ) {
                             log_error( INV_OBJ_SPEC, NULL, line );
                             exit( TMK_EXIT_FAILURE );
@@ -274,7 +274,7 @@ Char *parse_file_ext ( Char *f, File_spec_t *fs ) {
 
                         f = tp + 1;
                         tp = valid_name( f, &sz );
-                        if( tp == NULL ¦¦ sz > SEU_TYP_SZ ¦¦
+                        if( tp == NULL || sz > SEU_TYP_SZ ||
                               *tp != '>' ) {
                             tp = NULL;
                         }
@@ -300,9 +300,9 @@ Char *parse_file_ext ( Char *f, File_spec_t *fs ) {
 
             if( *f == '<' ) {
                 ++f;
-                if( ( tp = valid_name( f, &sz ) ) == NULL ¦¦
+                if( ( tp = valid_name( f, &sz ) ) == NULL ||
 
-                      ( *f == '*' ) ¦¦
+                      ( *f == '*' ) ||
 
                       ( *tp != '>' ) ) {
 
@@ -934,14 +934,14 @@ Char *obj_full_name ( File_spec_t *fs ) {
              }
         }
 
-        if( *fs->seu_type != 0 ¦¦
+        if( *fs->seu_type != 0 ||
 
 
 
 
             ( strcmp( fs->type, FS_T_PGM ) != 0 &&
               strcmp( fs->type, FS_T_FILE ) != 0 &&
-              ( strcmp( fs->type, FS_T_LIBFILE ) != 0 ¦¦
+              ( strcmp( fs->type, FS_T_LIBFILE ) != 0 ||
                 *fs->extmbr == 0 ) ) ) {
             append_buf( &objn_buf, "<" );
             append_buf( &objn_buf, fs->type );
@@ -982,7 +982,7 @@ Char *skip_obj_name ( Char *txt ) {
         if( srvopt_function() )
             printf("FCT:skip_obj_name(\"%s\")\n",txt);
 #endif
-        while( *txt && ( isalnum( *txt ) ¦¦
+        while( *txt && ( isalnum( *txt ) ||
                          look_for( "./(),*<>_", *txt ) != NULL ) ) {
             ++txt;
         }

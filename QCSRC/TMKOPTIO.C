@@ -132,21 +132,21 @@ Static set_srvopt( void *opt ) {
     while( cnt-- ) {
         switch( *op ) {
         case 'N' : srv_option = SRVOPT_NONE ; break;
-        case 'F' : srv_option ¦= SRVOPT_FUNCTION ; break;
-        case 'G' : srv_option ¦= SRVOPT_FCTRTN ; break;
-        case 'D' : srv_option ¦= SRVOPT_DETAIL ; break;
-        case 'M' : srv_option ¦= SRVOPT_DUMP_MACRO ; break;
-        case 'B' : srv_option ¦= SRVOPT_DUMP_BI ; break;
-        case 'R' : srv_option ¦= SRVOPT_DUMP_RULES ; break;
-        case 'S' : srv_option ¦= SRVOPT_DUMP_SUFFIX ; break;
-        case 'C' : srv_option ¦= SRVOPT_DUMP_DEFCMD ; break;
-        case 'I' : srv_option ¦= SRVOPT_DUMP_IO ; break;
-        case 'A' : srv_option ¦=
-                           SRVOPT_FUNCTION ¦ SRVOPT_FCTRTN ¦
-                           SRVOPT_DETAIL ¦
-                           SRVOPT_DUMP_MACRO ¦ SRVOPT_DUMP_BI ¦
-                           SRVOPT_DUMP_RULES ¦ SRVOPT_DUMP_SUFFIX ¦
-                           SRVOPT_DUMP_DEFCMD ¦ SRVOPT_DUMP_IO ; break;
+        case 'F' : srv_option |= SRVOPT_FUNCTION ; break;
+        case 'G' : srv_option |= SRVOPT_FCTRTN ; break;
+        case 'D' : srv_option |= SRVOPT_DETAIL ; break;
+        case 'M' : srv_option |= SRVOPT_DUMP_MACRO ; break;
+        case 'B' : srv_option |= SRVOPT_DUMP_BI ; break;
+        case 'R' : srv_option |= SRVOPT_DUMP_RULES ; break;
+        case 'S' : srv_option |= SRVOPT_DUMP_SUFFIX ; break;
+        case 'C' : srv_option |= SRVOPT_DUMP_DEFCMD ; break;
+        case 'I' : srv_option |= SRVOPT_DUMP_IO ; break;
+        case 'A' : srv_option |=
+                           SRVOPT_FUNCTION | SRVOPT_FCTRTN |
+                           SRVOPT_DETAIL |
+                           SRVOPT_DUMP_MACRO | SRVOPT_DUMP_BI |
+                           SRVOPT_DUMP_RULES | SRVOPT_DUMP_SUFFIX |
+                           SRVOPT_DUMP_DEFCMD | SRVOPT_DUMP_IO ; break;
         }
         ++op;
     }
@@ -295,22 +295,22 @@ Void process_options ( int argc, Char **argv ) {
                     options &= ~OPT_IGNORE;
                     break;
             case 'I' :
-                    options ¦= OPT_IGNORE;
+                    options |= OPT_IGNORE;
                     break;
             case 'V' :
                     options &= ~OPT_SILENT;
                     break;
             case 'S' :
-                    options ¦= OPT_SILENT;
+                    options |= OPT_SILENT;
                     break;
             case 'C' :
-                    options ¦= OPT_NOBIRULES;
+                    options |= OPT_NOBIRULES;
                     break;
             case 'B' :
                     options &= ~OPT_NOBIRULES;
                     break;
             case 'F' :
-                    options ¦= OPT_NOEXEC;
+                    options |= OPT_NOEXEC;
                     break;
             case 'E' :
                     options &= ~OPT_NOEXEC;
@@ -319,13 +319,13 @@ Void process_options ( int argc, Char **argv ) {
                     options &= ~OPT_TOUCH;
                     break;
             case 'T' :
-                    options ¦= OPT_TOUCH;
+                    options |= OPT_TOUCH;
                     break;
             case 'X' :
                     options &= ~OPT_DEBUG;
                     break;
             case 'D' :
-                    options ¦= OPT_DEBUG;
+                    options |= OPT_DEBUG;
                     break;
             }
             ++cp;
@@ -585,7 +585,7 @@ Void opt_set_ingore ( Void ) {
         if( srvopt_function() )
             printf("FCT:opt_set_ingore(Void)\n");
 #endif
-        options ¦= OPT_IGNORE;
+        options |= OPT_IGNORE;
 }
 
 Void opt_set_silent ( Void ) {
@@ -593,7 +593,7 @@ Void opt_set_silent ( Void ) {
         if( srvopt_function() )
             printf("FCT:opt_set_silent(Void)\n");
 #endif
-        options ¦= OPT_SILENT;
+        options |= OPT_SILENT;
 }
 
 

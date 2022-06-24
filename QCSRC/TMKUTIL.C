@@ -99,7 +99,7 @@ Char *skip_alnum ( Char *txt ) {
 
 Char *skip_macro_sym ( Char *txt ) {
         while( *txt &&
-               ( isalnum( *txt ) ¦¦ strchr( "_<?@*%", *txt ) != NULL ) )
+               ( isalnum( *txt ) || strchr( "_<?@*%", *txt ) != NULL ) )
             ++txt;
         return( txt );
 }
