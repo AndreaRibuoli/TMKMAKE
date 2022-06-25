@@ -75,6 +75,9 @@ PGM PARM(&DEVOPT_P)
             CRTCMOD  MODULE(&BLDLIB/TMKOPTIO)  SRCFILE(&SRCLIB/QCSRC) TGTRLS(*PRV)
             CRTCMOD  MODULE(&BLDLIB/TMKUTIL)   SRCFILE(&SRCLIB/QCSRC) TGTRLS(*PRV)
             CRTCMOD  MODULE(&BLDLIB/TMKEXPR)   SRCFILE(&SRCLIB/QCSRC) TGTRLS(*PRV)
+            MONMSG   MSGID(CPF0000)
+      /*      *=AVVERTENZA======> a - CZM1300  Il deponente -1 è inferiore a zero.    */
+      /*      Il deponente di una schiera dovrebbe essere superiore o uguale a zero.  */
 
             CRTCLPGM PGM(&TGTLIB/TMKTCHMB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*NONE) TGTRLS(*PRV)
             CRTCLPGM PGM(&TGTLIB/TMKTCHOB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*NONE) TGTRLS(*PRV)

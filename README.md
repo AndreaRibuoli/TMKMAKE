@@ -35,9 +35,6 @@ The source for everything you need has been provided in the GitHub repository
 | QCMDSRC  | TMKMAKE   | Command source for TMKMAKE command           |
 | QCLSRC   | TMKTCHMB  | TMKMAKE CL source                            |
 | QCLSRC   | TMKTCHOB  | TMKMAKE CL source                            |
-| QCLSRC   | TMKEXMP1  | Example TMKMAKE description file             |
-| QCLSRC   | TMKEXMP2  | Example TMKMAKE description file             |
-| QCLSRC   | TMKEXMP3  | Example TMKMAKE description file             |
 | QCSRC    | TMKUTIL   | C program source                             |
 | QCSRC    | TMKPARSE  | C program source                             |
 | QCSRC    | TMKOPTIO  | C program source                             |
