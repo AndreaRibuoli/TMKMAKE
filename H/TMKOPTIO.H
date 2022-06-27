@@ -121,7 +121,7 @@ Char    *get_next_requested_target ( Void );
 Int32   no_of_makefile_mbr ( Void );
 Char    *next_makefile_mbr ( Void );
 
-Void    opt_set_ingore ( Void );
+Void    opt_set_ignore ( Void );
 Void    opt_set_silent ( Void );
 Int16   opt_get_left_margin ( Void );
 Int16   opt_get_right_margin ( Void );

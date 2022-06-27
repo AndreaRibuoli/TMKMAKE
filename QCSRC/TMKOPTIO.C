@@ -577,10 +577,10 @@ Int16 opt_get_rtncde_sev ( Void ) {
         return( rtncde_severity );
 }
 
-Void opt_set_ingore ( Void ) {
+Void opt_set_ignore ( Void ) {
 #ifdef SRVOPT
         if( srvopt_function() )
-            printf("FCT:opt_set_ingore(Void)\n");
+            printf("FCT:opt_set_ignore(Void)\n");
 #endif
         options |= OPT_IGNORE;
 }

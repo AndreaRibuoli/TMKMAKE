@@ -1546,7 +1546,7 @@ Int16 parse_makefile ( Char *makef, Boolean parse_makef ) {
                 cmd_add_tail( &cur_wrk.cmd, sp, line );
                 break;
             case OP_IGNORE :
-                opt_set_ingore();
+                opt_set_ignore();
                 break;
             case OP_SILENT :
                 opt_set_silent();
