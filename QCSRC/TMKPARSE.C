@@ -14,8 +14,7 @@
 #include "tmkbuilt.h"
 #include "tmkopna.h"
 #include "tmkmsghd.h"
-
-
+#include "tmkexpr.h"
 
 
 
@@ -57,17 +56,6 @@ Static Work_t cur_wrk = { NULL, NULL, NULL, -1, -1 };
 
 Static Rules_t *head = NULL;
 Static Rules_t *next_rule = NULL;
-
-
-
-
-
-
-/* Static Void free_element ( Element_t *e ); */
-Int32 evaluate_exp ( Char *tp, Int16 line );
-
-
-
 
 
 Static

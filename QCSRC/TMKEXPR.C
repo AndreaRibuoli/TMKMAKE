@@ -10,6 +10,7 @@
 #include        "tmkfile.h"
 #include        "tmkparse.h"
 #include        "tmkoptio.h"
+#include        "tmkexpr.h"
 
 int     yyparse( Void );
 Int32   yylex( Void );
