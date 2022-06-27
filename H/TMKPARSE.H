@@ -124,7 +124,6 @@ Void    add_inf_rule_to_rule_tail ( Element_t *tep, Element_t *dep,
 Char    *has_dyn_macro ( Char *txt );
 
 Void    dump_rule_list( Void );
-Char    *get_cur_filename( Void );
 
 Void    free_element( Element_t *ep );
 Void    free_cmd ( Cmd_t *cp );
