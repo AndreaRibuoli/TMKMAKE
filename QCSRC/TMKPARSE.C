@@ -63,7 +63,7 @@ Static Rules_t *next_rule = NULL;
 
 
 
-Static Void free_element ( Element_t *e );
+/* Static Void free_element ( Element_t *e ); */
 Int32 evaluate_exp ( Char *tp, Int16 line );
 
 
