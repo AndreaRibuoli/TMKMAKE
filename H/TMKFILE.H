@@ -94,7 +94,10 @@ Void    touch_target ( Element_t *ep );
 Boolean same_obj_base ( File_spec_t *tfs, File_spec_t *dfs );
 Void    obj_not_exist_trap ( int sig );
 Char    *obj_full_name ( File_spec_t *fs );
+
+/*
 Boolean is_file_type ( Char *type );
+*/
 
 #endif  /* _TMKHFILE_H */
 
