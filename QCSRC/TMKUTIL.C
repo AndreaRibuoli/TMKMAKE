@@ -84,18 +84,6 @@ Int16 skip_trail_spaces_sz ( Char *txt, Int16 read_cnt ) {
 
 
 
-
-Char *skip_alnum ( Char *txt ) {
-        while( *txt && isalnum( *txt ) )
-            ++txt;
-        return( txt );
-}
-
-
-
-
-
-
 Char *skip_macro_sym ( Char *txt ) {
         while( *txt &&
                ( isalnum( *txt ) || strchr( "_<?@*%", *txt ) != NULL ) )

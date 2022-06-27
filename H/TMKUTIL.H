@@ -46,7 +46,6 @@ Char    *skip_non_white_spaces ( Char *txt );
 Int16   skip_trail_spaces ( Char *txt );
 Int16   skip_trail_spaces_sz ( Char *txt, Int16 read_cnt );
 Char    *skip_macro_sym ( Char *txt );
-Char    *skip_alnum ( Char *txt );
 Char    *skip_alpha ( Char *txt );
 Char    *look_for ( Char *txt, Char c );
 Char    *to_upper_str ( Char *s );
