@@ -52,6 +52,7 @@ The source for everything you need has been provided in the GitHub repository
 | H        | TMKMSGHD  | C header file                                |
 | H        | TMKMAKER  | C header file                                |
 | H        | TMKFILE   | C header file                                | 
+| H        | TMKEXPR   | C header file                                |
 | H        | TMKDICT   | C header file                                |
 | H        | TMKBUILT  | C header file                                |
 | H        | TMKBASE   | C header file                                |
