@@ -358,7 +358,7 @@ build the target, the command sequence associated with the .DEFAULT
 target keyword is used.  If the .DEFAULT target keyword is not defined,
 the TMKMAKE command outputs a message and stops processing.
 
-If the echo command appears in the command sequence of a rule, all the
+If the `echo` command appears in the command sequence of a rule, all the
 text characters following the echo command, except comments, will be
 output to the output device exactly as they are entered in the
 description file.
