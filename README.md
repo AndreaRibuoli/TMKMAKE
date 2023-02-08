@@ -878,3 +878,8 @@ internal built-in rule messages are directed to the session manager.
 
 The OVRDBF command can be used to capture any information that is sent
 to the session manager, and put it into a database file.
+
+---
+## BIBLIOGRAPHY
+* Programming with Make on the AS/400, Part 1, MC Press Online, 31-aug-1998, https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-i
+* Programming with Make on the AS/400, Part 2, MC Press Online, 30-sep-1998, https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-2 
