@@ -1,4 +1,5 @@
 # TMKMAKE
+
 New packaging for QUSRTOOL/TMKMAKE. Library QUSRTOOL is part of the IBM product 5770SS1 opt. 7.
 This document is based on the information in the member TMKINFO into the file QATTINFO.
 
@@ -17,18 +18,74 @@ This document describes:
 * a detailed description of the tool
 * how to use the tool
 
+---
+SUMMARY
+- [TMKMAKE](#tmkmake)
+  * [INTRODUCTION](#introduction)
+  * [INSTALLATION](#installation)
+    + [To delete the TMKMAKE command](#to-delete-the-tmkmake-command)
+  * [GLOSSARY](#glossary)
+  * [COMMAND SYNTAX](#command-syntax)
+    + [TARGET](#target)
+    + [SRCFILE](#srcfile)
+    + [SRCMBR](#srcmbr)
+    + [MACRO](#macro)
+    + [OPTION](#option)
+    + [MSGLOG](#msglog)
+    + [MARGINS](#margins)
+    + [RTNCDE](#rtncde)
+    + [SRVOPT](#srvopt)
+  * [SYNTAX](#syntax)
+    + [Comments](#comments)
+    + [Continuation Line](#continuation-line)
+    + [Escape Character](#escape-character)
+  * [DESCRIPTION FILE RULES](#description-file-rules)
+    + [Command Prefixes](#command-prefixes)
+    + [Rule Command Execution](#rule-command-execution)
+    + [Macro Definitions](#macro-definitions)
+    + [Built-in Macros](#built-in-macros)
+    + [Extended Built-in Macros](#extended-built-in-macros)
+    + [Dynamic Dependency](#dynamic-dependency)
+    + [Output Translation](#output-translation)
+    + [Target Keywords](#target-keywords)
+    + [Object Specification Syntax](#object-specification-syntax)
+    + [Object Specification Examples](#object-specification-examples)
+    + [Include Directives](#include-directives)
+    + [Conditional Directives](#conditional-directives)
+    + [Suffixes and Transformation Rules](#suffixes-and-transformation-rules)
+    + [Inference Rule Specification](#inference-rule-specification)
+    + [Inference Rule Examples](#inference-rule-examples)
+    + [Built-in Inference Rules](#built-in-inference-rules)
+  * [Link Editor Libraries](#link-editor-libraries)
+  * [ILE Enablement](#ile-enablement)
+  * [EXAMPLES](#examples)
+    + [Example 1](#example-1)
+    + [Example 2](#example-2)
+  * [Recursive TMKMAKE Command](#recursive-tmkmake-command)
+  * [Messages](#messages)
+  * [BIBLIOGRAPHY](#bibliography)
+
 --------------------------------------------------------------------------------
+
+## INTRODUCTION
+
+
+The TMKMAKE command is an implementation of the MAKE tool which maintains up-to-date versions of programs consisting of multiple parts.
+The TMKMAKE command reads a user-supplied description file, which describes the rules, part dependencies and commands to be executed for the parts being maintained.  The TMKMAKE command verifies that all targets specified are up-to-date.  If one or more of the dependants have been modified since the target was last updated, the commands associated with the target rule are invoked.  A target file which is not found is considered out-of-date.
+
+The TMKMAKE command supports the following features:  macro definition and substitution, include and conditional directive processing, built-in rules definition, suffix transformation, Extended Program Model (EPM) LIBFILE and System C/400 TXTLIB library maintenance, Integrated Language Environment (ILE) programming model, ILE binding directories, and recursive processing.
+
+---
 
 ## INSTALLATION
 
-To use the TMKMAKE command, you must install it.   This is done by
-calling the *PASERIE/INSTALL* utility:
+To use the TMKMAKE command, you must install it. This is done by calling the *PASERIE/INSTALL* utility:
 
 ```
 PASERIE/INSTALL GIT_USER(AndreaRibuoli) PACKAGEN(TMKMAKE)
 ```
 
-The source for everything you need has been provided in the GitHub repository 
+The **source** for everything you need has been provided in the GitHub repository 
 
 | FILE     | MEMBER    | DESCRIPTION                                  |
 |:-------- |:--------- |:-------------------------------------------- |
@@ -58,7 +115,7 @@ The source for everything you need has been provided in the GitHub repository
 | H        | TMKBASE   | C header file                                |
 | QMAKSRC  | BUILTIN   | TMKMAKE file                                 |
 
-The following objects are created:
+The following **objects** are created:
 
 | OBJECT NAME | OBJECT TYPE | DESCRIPTION          |
 |:----------- |:----------- |:-------------------- |
@@ -71,9 +128,9 @@ The following objects are created:
 
 Note:  The QMAKSRC file will be created if it does not already exist.
 
-## To delete the TMKMAKE command
+### To delete the TMKMAKE command
 
-  To delete the TMKMAKE tool delete the TMKMAKE library:
+To delete the TMKMAKE tool delete the TMKMAKE library:
 
 ```
 DLTLIB LIB(TMKMAKE)
@@ -123,7 +180,6 @@ The possible file names are:
 | QMAKSRC (default) | Specifies QMAKSRC as the source file. |
 | file\_name        | Specifies a user-defined file.        |
 
-
 ### SRCMBR
 
 Specifies the member in the description file to process.
@@ -133,7 +189,6 @@ Specifies the member in the description file to process.
 | \*FIRST (default) | Specifies the oldest member created in the source file.              |
 | \*ALL             | Processes all the members created in the source file alphabetically. |
 | member\_name      | Specifies a user-defined member.                                     |
-
 
 ### MACRO
 
@@ -213,25 +268,6 @@ The possible severity values are:
 ### SRVOPT
 
 Internal service options for debugging.
-
----
-
-The TMKMAKE command is an implementation of the MAKE tool which
-maintains up-to-date versions of programs consisting of multiple parts.
-The TMKMAKE command reads a user-supplied description file, which
-describes the rules, part dependencies and commands to be executed
-for the parts being maintained.  The TMKMAKE command verifies that all
-targets specified are up-to-date.  If one or more of the dependants have
-been modified since the target was last updated, the commands associated
-with the target rule are invoked.  A target file which is not found is
-considered out-of-date.
-
-The TMKMAKE command supports the following features:  macro definition
-and substitution, include and conditional directive processing,
-built-in rules definition, suffix transformation, Extended Program Model
-(EPM) LIBFILE and System C/400 TXTLIB library maintenance, Integrated
-Language Environment (ILE) programming model, ILE binding directories,
-and recursive processing.
 
 ---
 
@@ -631,6 +667,7 @@ where ObjectSpec is defined as
  1) seu-src_type is the SEU type for the members of a *FILE object.
 
 ### Inference Rule Examples
+
 ```
   .qcsrc            - .qcsrc<FILE>.<PGM>
                     - null suffix inference rule
@@ -653,7 +690,6 @@ found, the TMKMAKE command outputs a warning message and continues with
 normal processing.  If the OPTION (*NOBIRULES) is specified, the contents
 of this file will not be processed.  BUILTIN.QMAKSRC can be found in a
 user-defined library.
-
 
 ## Link Editor Libraries
 
@@ -803,8 +839,7 @@ part2<MODULE>: part2.QCSRC<FILE> $(header2) $(header3)
        $(CC) MODULE($(LIB)/part2) SRCFILE($(LIB)/QCSRC) $(CCOPTS)
 ```
 
-Example 2
----------
+### Example 2
 
 ```
 #
@@ -880,6 +915,8 @@ The OVRDBF command can be used to capture any information that is sent
 to the session manager, and put it into a database file.
 
 ---
+
 ## BIBLIOGRAPHY
-* Programming with Make on the AS/400, Part 1, MC Press Online, 31-aug-1998, https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-i
-* Programming with Make on the AS/400, Part 2, MC Press Online, 30-sep-1998, https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-2 
+
+* Programming with Make on the AS/400, Part 1, MC Press Online, 31-aug-1998, <https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-i>
+* Programming with Make on the AS/400, Part 2, MC Press Online, 30-sep-1998, <https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-2>
