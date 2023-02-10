@@ -9,7 +9,7 @@ PGM PARM(&DEVOPT_P &TGTRLS_P &TGTLIB_P)
  DCL VAR(&SRCLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
  DCL VAR(&BLDLIB) TYPE(*CHAR) LEN(10) VALUE(QTEMP)
  DCL VAR(&TGTLIB) TYPE(*CHAR) LEN(10)
- DCL VAR(&IFSPATH) TYPE(*CHAR) LEN(100)
+ /* DCL VAR(&IFSPATH) TYPE(*CHAR) LEN(100) */
  CHGVAR VAR(&DEVOPT) VALUE(&DEVOPT_P)
  MONMSG MSGID(MCH3601) EXEC(CHGVAR VAR(&DEVOPT) VALUE(L))
  CHGVAR VAR(&TGTRLS) VALUE(&TGTRLS_P)
@@ -308,7 +308,7 @@ ADDMSGD MSGID(TMK9010) +
 e does not conform to the syntax of a dependency rule for the TMKMAKE command. +
 &N Recovery  . . . :   Correct the invalid rule in the description file and try-
  again.') +
-  MSG('Invalid desription rule in line &1.') +
+  MSG('Invalid description rule in line &1.') +
   MSGF(&TGTLIB/TMKMSGF)
 ADDMSGD MSGID(TMK9011) +
   LVL(*CURRENT 01) +
@@ -763,8 +763,8 @@ ably missing ''='' character in output translation macro format. &N Recovery  .-
              MONMSG     MSGID(CPF0000)     EXEC(GOTO CMDLBL(NOCMD))
              DLTCMD     CMD(&TGTLIB/TMKMAKE)
 NOCMD:       CRTCMD     CMD(&TGTLIB/TMKMAKE) PGM(&TGTLIB/TMKMAKEC) +
-                          SRCFILE(&SRCLIB/QCMDSRC) +
-                          PMTFILE(&TGTLIB/TMKMSGF)
+                   SRCFILE(&SRCLIB/QCMDSRC) PMTFILE(&TGTLIB/TMKMSGF) +
+                   PRDLIB(&TGTLIB)
              DLTSPLF    FILE(TMKMAKE)              
  
 ENDPGM
