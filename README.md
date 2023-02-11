@@ -324,7 +324,7 @@ Every rule in a description file is composed of the following four parts:
      types, dependent definitions and command sequence information to
      each of the targets as if it were defined by an individual rule.
 
-* **Rule Type**:  A single colon (:) or double colon (::) must be specified
+* **Rule Type**:  A single colon (`:`) or double colon (`::`) must be specified
      for every rule.  The single colon is used to define parts dependency
      and the double colon is used to maintain EPM LIBFILE library objects
      and System C/400 TXTLIB library objects.
