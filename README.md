@@ -343,7 +343,7 @@ Every rule in a description file is composed of the following four parts:
      with a dependency rule.  If any dependents are newer than the
      target, the associated commands are executed.  If no command exists,
      the TMKMAKE command invokes a built-in inference rule if it exists.
-     A target with multiple rules (::) will only execute the commands
+     A target with multiple rules (`::`) will only execute the commands
      associated with that rule if the target is out-of-date with the
      dependents of the rule.  If the target us out-of-date for all rules,
      the commands associated with all the rules are executed.  If more
