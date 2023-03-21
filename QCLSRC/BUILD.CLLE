@@ -86,8 +86,8 @@ PGM PARM(&DEVOPT_P &TGTRLS_P &TGTLIB_P)
       /*      *=AVVERTENZA======> a - CZM1300  Il deponente -1 è inferiore a zero.    */
       /*      Il deponente di una schiera dovrebbe essere superiore o uguale a zero.  */
 
-            CRTCLPGM PGM(&TGTLIB/TMKTCHMB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*NONE) TGTRLS(&TGTRLS)
-            CRTCLPGM PGM(&TGTLIB/TMKTCHOB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*NONE) TGTRLS(&TGTRLS)
+            CRTCLPGM PGM(&TGTLIB/TMKTCHMB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*PRINT) TGTRLS(&TGTRLS)
+            CRTCLPGM PGM(&TGTLIB/TMKTCHOB)  SRCFILE(&SRCLIB/QCLSRC) OUTPUT(*PRINT) TGTRLS(&TGTRLS)
 
 /*********** BINDING ALL C PROGRAMS **********************************/
              CRTPGM       PGM(&TGTLIB/TMKMAKEC) +
