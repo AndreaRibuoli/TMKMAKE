@@ -72,10 +72,16 @@ Char *srv_fs( File_spec_t *fs ) {
         if( fs == NULL )
             return( "NULL" );
 
-        sprintf(srv_buf,"{%s/%s(%s)<%s%s%s>,%d,%d,%d}", fs->lib,fs->file,
-             fs->extmbr,fs->type,
-             fs->seu_type!=NULL&&*fs->seu_type!=0?",":"",fs->seu_type,
-             fs->is_file,fs->last_update,fs->create_date);
+        sprintf(srv_buf,"{%s/%s(%s)<%s%s%s>,%d,%d,%d}",
+      fs->lib,
+      fs->file,
+      fs->extmbr,
+      fs->type,
+      ((fs->seu_type!=NULL) && (*fs->seu_type!=0))?",":"",
+      fs->seu_type,
+      fs->is_file,
+      fs->last_update,
+      fs->create_date);
 
         return( srv_buf );
 }

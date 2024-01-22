@@ -920,3 +920,5 @@ to the session manager, and put it into a database file.
 
 * Programming with Make on the AS/400, Part 1, MC Press Online, 31-aug-1998, <https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-i>
 * Programming with Make on the AS/400, Part 2, MC Press Online, 30-sep-1998, <https://www.mcpressonline.com/programming-other/general/programming-with-make-on-the-as400-part-2>
+
+* Setting up TMKMAKE, in Try AS/400 Wiki, <https://try-as400.pocnet.net/wiki/Setting_up_TMKMAKE#Bugs_and_oddities>
