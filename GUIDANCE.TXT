@@ -1,5 +1,4 @@
 QCLSRC    BUILD     CLLE      BUILD CLLE auto-generated
-QCLSRC    TMKDLT    CLP       MAKE tool uninstall
 QCLSRC    TMKTCHMB  CLP       MAKE CL utility
 QCLSRC    TMKTCHOB  CLP       MAKE CL utility
 QCMDSRC   TMKMAKE   CMD       MAKE command
