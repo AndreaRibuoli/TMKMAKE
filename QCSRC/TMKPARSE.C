@@ -796,6 +796,7 @@ Static
 Char *read_next_line ( Int16 *line ) {
         Boolean cont_line;
         Boolean read_more;
+        Boolean keep_blanks;
         Int32 read_cnt;
         Int32 tot_cnt;
         Char *hp;
@@ -813,6 +814,7 @@ Char *read_next_line ( Int16 *line ) {
 try_again:
         read_more = TRUE;
         cont_line = FALSE;
+        keep_blanks = FALSE;
         tot_cnt = 0;
         cur_line = rd_line + 1;
 
@@ -841,7 +843,7 @@ try_again:
                     }
                 }
 
-                if( cont_line ) {
+                if( cont_line && !keep_blanks ) {
 
                      while( *hp && isspace( *hp ) ) {
                          --read_cnt;
@@ -851,7 +853,7 @@ try_again:
 
 
 
-                if( *tp == '\\' || *tp == '+' ) {
+                if( *tp == '+' ) {
                     cont_line =
                     read_more = TRUE;
 
@@ -872,6 +874,30 @@ try_again:
                     *tp = 0;
                     ++read_cnt;
                 }
+
+
+                if( *tp == '\\') {
+                    cont_line =
+                    read_more = 
+                    keep_blanks = TRUE;
+
+
+                    *tp = '\0';
+
+
+                /*  read_cnt = skip_trail_spaces( hp ); */
+
+
+                    if( read_cnt == 0 )
+                        continue;
+
+
+
+                    tp = hp + read_cnt;
+                /*  *tp++ = ' '; */
+                    *tp = 0;
+                 /* ++read_cnt; */
+                }                
                 tot_cnt = append_rd_buf( read_cnt, hp,
                                          &ibuf2_sz, &ibuf2 );
             }
