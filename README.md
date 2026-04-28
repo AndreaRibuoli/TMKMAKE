@@ -79,10 +79,10 @@ The TMKMAKE command supports the following features:  macro definition and subst
 
 ## INSTALLATION
 
-To use the TMKMAKE command, you must install it. This is done by calling the *PASERIE/INSTALL* utility:
+To use the TMKMAKE command, you must install it. This is done by calling the *WOPASE/INSTALL* utility:
 
 ```
-PASERIE/INSTALL GIT_USER(AndreaRibuoli) PACKAGEN(TMKMAKE)
+WOPASE/INSTALL REPO_OWNER(AndreaRibuoli) REPOSITORY(TMKMAKE)
 ```
 
 The **source** for everything you need has been provided in the GitHub repository 
