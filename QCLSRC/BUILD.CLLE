@@ -774,6 +774,6 @@ ably missing ''='' character in output translation macro format. &N Recovery  .-
 NOCMD:       CRTCMD     CMD(&TGTLIB/TMKMAKE) PGM(&TGTLIB/TMKMAKEC) +
                    SRCFILE(&SRCLIB/QCMDSRC) PMTFILE(&TGTLIB/TMKMSGF) +
                    PRDLIB(&TGTLIB)
-             DLTSPLF    FILE(TMKMAKE)              
+        /*   DLTSPLF    FILE(TMKMAKE) */              
  
 ENDPGM
